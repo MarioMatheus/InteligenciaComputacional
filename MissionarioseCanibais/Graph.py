@@ -1,17 +1,3 @@
-class Node:
-  def __init__(self, content):
-    self.content = content
-
-  def __str__(self):
-    return str(self.content)
-
-  def __repr__(self):
-    return str(self)
-
-  def __eq__(self, rightNode):
-    return self.content == rightNode.content
-
-
 class Graph:
   def __init__(self):
     self.nodes = []
@@ -23,6 +9,7 @@ class Graph:
   def addNode(self, node):
     self.nodes.append(node)
 
+  # Method for crete edges
   def addEdgesWithNodes(self, node1, node2):
     if node1 not in self.nodes:
       self.nodes.append(node1)
@@ -31,6 +18,7 @@ class Graph:
 
     self.edges.append((node1, node2))
 
+  # Method that return the adjacent nodes of a node
   def getAdjacentNodes(self, node):
     adjacentNodes = []
     for edges in self.edges:
@@ -40,7 +28,9 @@ class Graph:
 
     return adjacentNodes
 
-  def depthFirstSearch(self, searchRoot, goalNode, genNode=None):
+  # DFS Algorithm for search a goal from a root 
+  # with a optional param for run some function
+  def depthFirstSearch(self, searchRoot, goalNode, genEdges=None):
     visited = []
     frontier = []
     frontier.append(searchRoot)
@@ -50,8 +40,8 @@ class Graph:
         visited.append(currentNode)
         return visited
       visited.append(currentNode)
-      if genNode:
-        genNode(self, currentNode)
+      if genEdges:
+        genEdges(self, currentNode)
       adjacentNodes = reversed(self.getAdjacentNodes(currentNode))
       for node in adjacentNodes:
         if (node not in visited) and (node not in frontier):

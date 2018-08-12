@@ -23,10 +23,12 @@ class State:
   def __repr__(self):
     return str(self)
 
+  # Checks for more cannibals than missionaries
   def killingsHappen(self):
     return (self.missionaries[0] != 0 and self.missionaries[0] < self.cannibals[0])\
       or (self.missionaries[1] != 0 and self.missionaries[1] < self.cannibals[1])
 
+  # Moves the boat from one shore to the other if possible
   def moveBoat(self, qtdMissionarios, qtdCannibals):
     qtdOnBoat = qtdMissionarios + qtdCannibals
     if not(0 < qtdOnBoat < 3):
@@ -47,69 +49,33 @@ class State:
 
 class StateHandler:
 
+  # Generates the possible states from a state
   def nextPossibleStates(self, state):
     possibleStates = []
 
-    # Move two missionaries
+    # Move two missionaries if possible
     auxState = copy(state)
     if auxState.moveBoat(2,0) and not auxState.killingsHappen():
       possibleStates.append(auxState)
 
-    # Move two cannibals
+    # Move two cannibals if possible
     auxState = copy(state)
     if auxState.moveBoat(0,2) and not auxState.killingsHappen():
       possibleStates.append(auxState)
 
-    # Move one cannibal and one missionary
+    # Move one cannibal and one missionary if possible
     auxState = copy(state)
     if auxState.moveBoat(1,1) and not auxState.killingsHappen():
       possibleStates.append(auxState)
 
-    # Move one missionary
+    # Move one missionary if possible
     auxState = copy(state)
     if auxState.moveBoat(1,0) and not auxState.killingsHappen():
       possibleStates.append(auxState)
 
-    # Move one cannibal
+    # Move one cannibal if possible
     auxState = copy(state)
     if auxState.moveBoat(0,1) and not auxState.killingsHappen():
       possibleStates.append(auxState)
 
     return possibleStates
-
-
-# t = State()
-# print(t)
-# print(t.moveBoat(0,2))
-# print(t.killingsHappen())
-# print(t)
-# print(t.moveBoat(0,1))
-# print(t.killingsHappen())
-# print(t)
-# print(t.moveBoat(0,2))
-# print(t.killingsHappen())
-# print(t)
-# print(t.moveBoat(0,1))
-# print(t.killingsHappen())
-# print(t)
-# print(t.moveBoat(2,0))
-# print(t.killingsHappen())
-# print(t)
-# print(t.moveBoat(1,1))
-# print(t.killingsHappen())
-# print(t)
-# print(t.moveBoat(2,0))
-# print(t.killingsHappen())
-# print(t)
-# print(t.moveBoat(0,1))
-# print(t.killingsHappen())
-# print(t)
-# print(t.moveBoat(0,2))
-# print(t.killingsHappen())
-# print(t)
-# print(t.moveBoat(0,1))
-# print(t.killingsHappen())
-# print(t)
-# print(t.moveBoat(0,2))
-# print(t.killingsHappen())
-# print(t)
