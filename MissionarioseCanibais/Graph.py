@@ -4,12 +4,14 @@ class Graph:
     self.edges = []
 
   def __str__(self):
-    return "Graph\n Nodes:\t{nodes}\n Edges:\t{edges}".format(nodes=self.nodes, edges=self.edges)
+    return "Graph\n Nodes:\t{nodes}\n Edges:\t{edges}" \
+      .format(nodes=self.nodes, edges=self.edges)
 
+  # Method for create nodes
   def addNode(self, node):
     self.nodes.append(node)
 
-  # Method for crete edges
+  # Method for create edges
   def addEdgesWithNodes(self, node1, node2):
     if node1 not in self.nodes:
       self.nodes.append(node1)
@@ -36,10 +38,9 @@ class Graph:
     frontier.append(searchRoot)
     while frontier:
       currentNode = frontier.pop()
-      if currentNode == goalNode:
-        visited.append(currentNode)
-        return visited
       visited.append(currentNode)
+      if currentNode == goalNode:
+        return visited
       if genEdges:
         genEdges(self, currentNode)
       adjacentNodes = reversed(self.getAdjacentNodes(currentNode))
