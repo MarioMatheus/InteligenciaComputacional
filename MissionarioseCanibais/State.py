@@ -1,3 +1,7 @@
+# Constants for represent the shore
+LEFT = 0    # Left Shore
+RIGHT = 1   # Right Shore
+
 class State:
   def __init__(self, missionaries=(3,0), cannibals=(3,0), boat='left'):
     self.missionaries = missionaries
@@ -9,8 +13,8 @@ class State:
      " Missionaries - Left: {misLeft} | Right: {misRight}\n"
      " Cannibals - Left {canLeft} | Right {canRight}\n"
      " Boat on {boatPos}").format(
-       misLeft=self.missionaries[0], misRight=self.missionaries[1],
-       canLeft=self.cannibals[0], canRight=self.cannibals[1],
+       misLeft=self.missionaries[LEFT], misRight=self.missionaries[RIGHT],
+       canLeft=self.cannibals[LEFT], canRight=self.cannibals[RIGHT],
        boatPos=self.boat)
 
   def __eq__(self, rightState):
@@ -23,8 +27,8 @@ class State:
 
   # Checks for more cannibals than missionaries
   def killingsHappen(self):
-    return (self.missionaries[0] != 0 and self.missionaries[0] < self.cannibals[0])\
-      or (self.missionaries[1] != 0 and self.missionaries[1] < self.cannibals[1])
+    return (self.missionaries[LEFT] != 0 and self.missionaries[LEFT] < self.cannibals[LEFT])\
+      or (self.missionaries[RIGHT] != 0 and self.missionaries[RIGHT] < self.cannibals[RIGHT])
 
   # Moves the boat from one shore to the other if possible
   def moveBoat(self, qtdMissionarios, qtdCannibals):
@@ -32,15 +36,15 @@ class State:
     if not(0 < qtdOnBoat < 3):
       return False
     if self.boat == 'left':
-      if self.missionaries[0] < qtdMissionarios or self.cannibals[0] < qtdCannibals:
+      if self.missionaries[LEFT] < qtdMissionarios or self.cannibals[LEFT] < qtdCannibals:
         return False
-      self.missionaries = (self.missionaries[0] - qtdMissionarios, self.missionaries[1] + qtdMissionarios)
-      self.cannibals = (self.cannibals[0] - qtdCannibals, self.cannibals[1] + qtdCannibals)
+      self.missionaries = (self.missionaries[LEFT] - qtdMissionarios, self.missionaries[RIGHT] + qtdMissionarios)
+      self.cannibals = (self.cannibals[LEFT] - qtdCannibals, self.cannibals[RIGHT] + qtdCannibals)
       self.boat = 'right'
     else:
-      if self.missionaries[1] < qtdMissionarios or self.cannibals[1] < qtdCannibals:
+      if self.missionaries[RIGHT] < qtdMissionarios or self.cannibals[RIGHT] < qtdCannibals:
         return False
-      self.missionaries = (self.missionaries[0] + qtdMissionarios, self.missionaries[1] - qtdMissionarios)
-      self.cannibals = (self.cannibals[0] + qtdCannibals, self.cannibals[1] - qtdCannibals)
+      self.missionaries = (self.missionaries[LEFT] + qtdMissionarios, self.missionaries[RIGHT] - qtdMissionarios)
+      self.cannibals = (self.cannibals[LEFT] + qtdCannibals, self.cannibals[RIGHT] - qtdCannibals)
       self.boat = 'left'
     return True
