@@ -1,5 +1,6 @@
 from Graph import Graph
-from State import State, StateHandler
+from State import State
+from StateHandler import StateHandler
 
 # Creating the data structure and your handler
 grafo = Graph()
