@@ -32,6 +32,7 @@ class Graph:
 
   # DFS Algorithm for search a goal from a root 
   # with a optional param for run some function
+  # return the visited nodes
   def depthFirstSearch(self, searchRoot, goalNode, genEdges=None):
     visited = []
     frontier = []
