@@ -7,8 +7,8 @@ grafo = Graph()
 stateHandler = StateHandler()
 
 # Defining the initial state and the goal
-initialState = State()
-goalState = State(["<","<","<","<"," ",">",">",">",">"])
+initialState = State()              # State(board=[">",">",">",">"," ","<","<","<","<"])
+goalState = stateHandler.goalState  # State(board=["<","<","<","<"," ",">",">",">",">"])
 grafo.addNode(initialState)
 
 # Method that will run inside the search for generates the possible states

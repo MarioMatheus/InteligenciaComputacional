@@ -44,7 +44,7 @@ class Graph:
         return visited
       if genEdges:
         genEdges(self, currentNode)
-      adjacentNodes = self.getAdjacentNodes(currentNode)
+      adjacentNodes = reversed(self.getAdjacentNodes(currentNode))
       for node in adjacentNodes:
         if (node not in visited) and (node not in frontier):
           frontier.append(node)

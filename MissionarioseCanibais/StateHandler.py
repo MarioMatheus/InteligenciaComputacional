@@ -1,6 +1,9 @@
 from copy import copy
+from State import State
 
 class StateHandler:
+  def __init__(self):
+      self.goalState = State((0,3),(0,3),'right')
 
   # Generates the possible states from a state
   def nextPossibleStates(self, state):

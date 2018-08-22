@@ -1,6 +1,9 @@
 from copy import deepcopy
+from State import State
 
 class StateHandler:
+  def __init__(self):
+      self.goalState = State(["<","<","<","<"," ",">",">",">",">"])
 
   def nextPossibleStates(self, state):
     possibleStates = []
@@ -11,4 +14,4 @@ class StateHandler:
         auxState.moveArrow(index)
         possibleStates.append(auxState)
 
-    return possibleStates  
+    return possibleStates
