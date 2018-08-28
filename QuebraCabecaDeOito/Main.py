@@ -7,8 +7,7 @@ grafo = Graph()
 stateHandler = StateHandler()
 
 # Defining the initial state and the goal
-# initialState = State([[' ','2','3'],['1','4','5'],['7','8','6']])
-initialState = State()
+initialState = State([[' ','2','3'],['1','4','5'],['7','8','6']])
 goalState = stateHandler.goalState
 grafo.addNode(initialState)
 
