@@ -11,7 +11,7 @@ class State:
         if ' ' in row:
           self.emptySpaceIndexes = (self.board.index(row), row.index(' '))
     else:
-      self.board = self.shuffleBoard()
+      self.board = self.generateSolvableBoard()
     
 
 
@@ -34,21 +34,27 @@ class State:
       )
 
 
-  def countDegreeOfDisorder(self, board):
-    count = 0
-    correctMap = {
-      '1': (0,0), '2': (0,1), '3': (0,2),
-      '4': (1,0), '5': (1,1), '6': (1,2),
-      '7': (2,0), '8': (2,1)
-    }
-    for i, row in enumerate(board):
-      for j, value in enumerate(row):
-        if value is not ' ':
-          correctPos = correctMap[value]
-          if i is not correctPos[0] or j is not correctPos[1]:
-            count += 1
+  def getListOfPieces(self, board):
+    listOfPieces = []
+    for row in board:
+      for value in row:
+        listOfPieces.extend(value)
     
-    return count
+    return listOfPieces
+
+
+
+  def checkIfBoardIsSolvable(self, board):
+    inversions = 0
+    auxList = self.getListOfPieces(board)
+    
+    for i in range(len(auxList)):
+      for j in range(i+1, len(auxList)):
+        if auxList[j] is not ' ' and auxList[i] is not ' ' and auxList[j] > auxList[i]:
+          inversions += 1
+    
+    return (inversions%2 == 0)
+
 
   def shuffleBoard(self):
     board = []
@@ -62,6 +68,15 @@ class State:
       ])
     
     return board
+
+
+  def generateSolvableBoard(self):
+    auxBoard = self.shuffleBoard()
+    while not self.checkIfBoardIsSolvable(auxBoard):
+      auxBoard = self.shuffleBoard()
+
+    return auxBoard
+    
 
   
   def isValidMove(self, indexRow, indexCol):
