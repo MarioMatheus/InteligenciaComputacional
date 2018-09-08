@@ -3,6 +3,10 @@ class State:
       self.board = board
       self.emptyFieldIndex = self.board.index(" ")
 
+
+  def __hash__(self):
+        return super().__hash__()
+
   def __eq__(self, rightState):
       return self.board == rightState.board
 

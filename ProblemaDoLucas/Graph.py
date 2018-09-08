@@ -37,16 +37,32 @@ class Graph:
     visited = []
     frontier = []
     frontier.append(searchRoot)
+
+    cameFrom = {}
+    cameFrom[searchRoot] = None
+    
     while frontier:
       currentNode = frontier.pop()
       visited.append(currentNode)
       if currentNode == goalNode:
-        return visited
+        return self.getPathOf(currentNode, cameFrom, searchRoot)
       if genEdges:
         genEdges(self, currentNode)
       adjacentNodes = reversed(self.getAdjacentNodes(currentNode))
       for node in adjacentNodes:
         if (node not in visited) and (node not in frontier):
           frontier.append(node)
+          cameFrom[node] = currentNode
 
     return None
+
+  def getPathOf(self, node, cameFrom, initial):
+    path = []
+    current = node
+    while current != initial:
+        path.append(current)
+        current = cameFrom[current]
+
+    path.append(initial)
+    path = list(reversed(path))
+    return path

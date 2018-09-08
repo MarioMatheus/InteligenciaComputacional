@@ -17,6 +17,9 @@ class State:
        canLeft=self.cannibals[LEFT], canRight=self.cannibals[RIGHT],
        boatPos=self.boat)
 
+  def __hash__(self):
+      return super().__hash__()
+
   def __eq__(self, rightState):
     return self.missionaries == rightState.missionaries \
       and self.cannibals == rightState.cannibals \

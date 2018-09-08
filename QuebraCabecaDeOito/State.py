@@ -14,6 +14,9 @@ class State:
       self.board = self.generateSolvableBoard()
     
 
+  def __hash__(self):
+      return super().__hash__()
+
 
   def __eq__(self, rightValue):
       return self.board == rightValue.board
