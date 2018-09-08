@@ -41,30 +41,39 @@ mae(X, Y) :-
 irmao(X, Y) :-
   masculino(X),
   progenitor(P, X),
-  progenitor(P, Y).
+  progenitor(P, Y),
+  X\==Y.
 
 irma(X, Y) :-
   feminino(X),
   progenitor(P, X),
-  progenitor(P, Y).
+  progenitor(P, Y),
+  X\==Y.
 
-% descendente(X,Y) :-
-%   progenitor(X,Y).
+descendente(X,Y) :-
+  progenitor(X,Y).
  
-% descendente(X,Y) :-
-%   progenitor(X,Z),
-%   descendente(Z,Y).
+descendente(X,Y) :-
+  progenitor(X,Z),
+  descendente(Z,Y).
 
 avo(X, Y) :-
+  masculino(X),
   pai(P, Y),
   pai(X, P).
 
-% tio(X, Y) :-
-%   progenitor(P, Y),
-%   irmao(I, P),
-%   I == X.
+tio(X, Y) :-
+  irmao(X, I),
+  progenitor(I, Y).
 
-% primo(X, Y) :-
-%   pai(P, Y),
-%   pai(P2, X),
-%   irmao(P, P2).
+primo(X, Y) :-
+  progenitor(P1, X),
+  progenitor(P2, Y),
+  irmao(P1, P2),
+  X\==Y.
+
+primo(X, Y) :-
+  progenitor(P1, X),
+  progenitor(P2, Y),
+  irma(P1, P2),
+  X\==Y.
