@@ -2,25 +2,24 @@ import dataset as ds
 import numpy as np
 import operator
 
-def selectFlowers(setosas, versicolors, virginicas, dataset):
-    for data in dataset:
-        if data[-1] is "setosa":
-            setosas.append([data[0], data[1], data[2], data[3]])
-        elif data[-1] is "versicolor":
-            versicolors.append([data[0], data[1], data[2], data[3]])
-        else:
-            virginicas.append([data[0], data[1], data[2], data[3]])
-    setosas = np.array(setosas)
-    versicolors = np.array(versicolors)
-    virginicas = np.array(virginicas)
+def kNearestNeighbor(k, dataset, flowerDimension):
+    distances = list(
+        map(lambda flowerPoint: ds.euclidianDistanceBetween(flowerPoint, flowerDimension), dataset)
+    )
+    distancesOrdered = sorted(distances)
+    
+    flowers = ["setosa", "versicolor", "virginica"]
+    numbers = [0, 0, 0]
+    for i in range(k):
+        flower = dataset[ distances.index(distancesOrdered[i]) ][-1]
+        numbers[ flowers.index(flower) ] += 1
 
-def kNearestNeighbor(dataset, flowerDimension):
-    setosas = []
-    versicolors = []
-    virginicas = []
+    return flowers[ numbers.index(max(numbers)) ]
 
-    selectFlowers(setosas, versicolors, virginicas, dataset)
-    print(reduce(lambda a,b: a + b, setosas))
-    # print(setosas[0])
 
-kNearestNeighbor(ds.irisFlowersDataset, None)
+
+
+newFlowerDimension = [ 5.4,  3. ,  4.5,  1.5 ]
+knn = kNearestNeighbor(8, ds.irisFlowersDataset, newFlowerDimension)
+print(knn)
+

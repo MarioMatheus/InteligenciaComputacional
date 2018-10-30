@@ -6,7 +6,6 @@ def nearestNeighbor(dataset, flowerDimension):
         map(lambda flowerPoint: ds.euclidianDistanceBetween(flowerPoint, flowerDimension), dataset)
     )
     minimunDistanceIndex = distances.index(min(distances))
-    print(distances[minimunDistanceIndex])
     return(dataset[minimunDistanceIndex][-1])
 
     
