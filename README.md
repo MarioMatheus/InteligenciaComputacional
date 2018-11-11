@@ -9,3 +9,4 @@
 * [Problema do Lucas](/ProblemaDoLucas) com Busca em Profundidade
 * [Quebra Cabeça de 8](/QuebraCabecaDeOito) com algoritmo A*
 * [Classificadores Elementares](/ClassificadoresElementares) com os algoritmos NN, kNN e DMC
+* [Arvores de Decisão](/ArvoresDeDecisao) ID3 para gerar árvores de decisão
