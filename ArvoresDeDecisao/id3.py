@@ -88,12 +88,9 @@ def i_can_play_tennis_with(conditions):
     return answer
 
 
-# decision_tree = id3_for_playtennis()
-# print(decision_tree)
-
 current_conditions = {
     "Outlook": "Rain",
-    "Humidity": "High"
+    "Wind": "Weak"
 }
 
 answer = i_can_play_tennis_with(current_conditions)
