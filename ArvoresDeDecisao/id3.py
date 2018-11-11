@@ -73,4 +73,28 @@ def id3_for_playtennis():
     return build_decision_tree(playtennis.data, playtennis.decisions, playtennis.data_map)
 
 
-print(id3_for_playtennis())
+def i_can_play_tennis_with(conditions):
+    answers = ['Yes', 'No']
+    decision_tree = id3_for_playtennis()
+    answer = ''
+    while answer not in answers:
+        node = list(decision_tree.keys())[0]
+        if node not in conditions.keys():
+            answer = 'Depends on the ' + node
+            break
+        answer = decision_tree[node][conditions[node]]
+        decision_tree = answer
+
+    return answer
+
+
+# decision_tree = id3_for_playtennis()
+# print(decision_tree)
+
+current_conditions = {
+    "Outlook": "Rain",
+    "Humidity": "High"
+}
+
+answer = i_can_play_tennis_with(current_conditions)
+print(answer)
