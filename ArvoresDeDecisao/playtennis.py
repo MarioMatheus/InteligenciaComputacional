@@ -25,3 +25,13 @@ for d in data:
         decisions[d[-1]] += 1
     else:
         decisions[d[-1]] = 1
+
+def get_labels_count(data):
+    labels_count = {}
+    for d in data:
+        if d[-1] in labels_count.keys():
+            labels_count[d[-1]] += 1
+        else:
+            labels_count[d[-1]] = 1
+            
+    return labels_count
